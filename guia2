@@ -1,277 +1,777 @@
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <cstring>
+
 using namespace std;
 
-const int MAX_ATOMOS = 100;
+const int MAX_ATOMOS = 1000;
+const int MAX_ATOMOS_PROT = 10;
+const int MAX_PROTEINAS = 500;
 
 struct Atomo {
-  int id;
-  char simbolo;
-  double x, y, z;
-  double carga;
+    int id;
+    char simbolo;
+    double x, y, z;
+    double carga;
 };
 
 struct Proteina {
-  char nombre[30];
-  int num_atomos;
-  Atomo atomos[MAX_ATOMOS];
+    char nombre[30];
+    int num_atomos;
+    Atomo atomos[MAX_ATOMOS];
+    int ref_ids[MAX_ATOMOS_PROT];
 };
 
-void crear_atomos(Atomo coleccion_atomos[1000]) {
-    Atomo nuevo_atomo;
-    char simbolo;
-    float x, y, z, carga;
-    int id = 0;
+void inicializar_atomos(Atomo a[], int n) {
+    for (int i = 0; i < n; i++) {
+        a[i].id = -1;
+        a[i].simbolo = '\0';
+        a[i].x = 0.0;
+        a[i].y = 0.0;
+        a[i].z = 0.0;
+        a[i].carga = 0.0;
+    }
+}
 
-    // Primera posición vacía y cuenta átomos existentes en la coleccion
-    bool encontrado_vacio = false;
-    for(int i = 0; i < 1000; i++) {
-        if (coleccion_atomos[i].simbolo == '\0') {
-            id = i;  // Esta es la posición donde insertaremos
-            encontrado_vacio = true;
+void inicializar_proteinas(Proteina p[], int n) {
+    for (int i = 0; i < n; i++) {
+        p[i].nombre[0] = '\0';
+        p[i].num_atomos = 0;
+        for (int j = 0; j < MAX_ATOMOS; j++) {
+            p[i].atomos[j].simbolo = '\0';
+            p[i].atomos[j].id = -1;
+            p[i].atomos[j].x = 0.0;
+            p[i].atomos[j].y = 0.0;
+            p[i].atomos[j].z = 0.0;
+            p[i].atomos[j].carga = 0.0;
+        }
+        for (int j = 0; j < MAX_ATOMOS_PROT; j++) {
+            p[i].ref_ids[j] = -1;
+        }
+    }
+}
+
+int posicion_vacia_atomos(const Atomo a[], int n) {
+    for (int i = 0; i < n; i++) {
+        if (a[i].simbolo == '\0') {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int posicion_vacia_proteinas(const Proteina p[], int n) {
+    for (int i = 0; i < n; i++) {
+        if (p[i].nombre[0] == '\0') {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int buscar_atomo_por_id(const Atomo a[], int n, int id) {
+    for (int i = 0; i < n; i++) {
+        if (a[i].simbolo == '\0') {
             break;
         }
-    }
-
-    if (!encontrado_vacio) {
-        cout << "Error: La colección está llena (1000 átomos)" << endl;
-        return;
-    }
-
-    cout << "ID asignado: " << id << endl;
-    nuevo_atomo.id = id;
-
-    cout << "Ingrese el símbolo del átomo: ";
-    cin >> simbolo;
-while (!(simbolo >= 'A' && simbolo <= 'Z')) {
-	cout << "Error: el simbolo tiene que ser mayuscula: ";
-	cin >> simbolo;
-}
-    nuevo_atomo.simbolo = simbolo;
-
-cout << "Ingrese la coordenada X: ";
-cin >> x;
-while (cin.fail()) {
-    cin.clear();
-    cin.ignore(10000, '\n');
-    cout << "ERROR: valor invalido. Ingrese un numero para X: ";
-    cin >> x;
-}
-nuevo_atomo.x = x;
-
-cout << "Ingrese la coordenada y: ";
-	cin >> y;
-	while (cin.fail()) {
-    		cin.clear();
-   		 cin.ignore(10000, '\n');
-    		cout << "ERROR: valor invalido. Ingrese un numero para y: ";
-    	cin >> y;
-}
-	nuevo_atomo.y = y;
-
-cout << "Ingrese la coordenada Z: ";
-cin >> z;
-while (cin.fail()) {
-    		cin.clear();
-    			cin.ignore(10000, '\n');
-    		cout << "ERROR: valor invalido. Ingrese un numero para z: ";
-    	cin >> z;
-}
-	nuevo_atomo.z = z;
-
-
-char buffer_carga[50];
-		cout << "Ingrese la carga del atomo: ";
-	cin >> buffer_carga;
-
-for (int i = 0; buffer_carga[i] != '\0'; i++) {
-    		if (buffer_carga[i] == ',') {
-       		buffer_carga[i] = '.';
-    }
-}
-
-while (atof(buffer_carga) == 0 && buffer_carga[0] != '0' && buffer_carga[0] != '-') {
-    	cout << "ERROR: valor invalido. Ingrese un numero para la carga: ";
-    cin >> buffer_carga;
-    	for (int i = 0; buffer_carga[i] != '\0'; i++) {
-        	if (buffer_carga[i] == ',') {
-            		buffer_carga[i] = '.';
+        if (a[i].id == id) {
+            return i;
         }
     }
+    return -1;
 }
 
-carga = atof(buffer_carga);
-nuevo_atomo.carga = carga;
-
-    // Insertar en la posición encontrada
-    coleccion_atomos[id] = nuevo_atomo;
-
-    cout << "Átomo creado exitosamente!" << endl;
-}
-
-void guardar_atomos(Atomo coleccion_atomos[1000]) {
-    ofstream archivo("atomos.txt");
-
-    if(archivo.is_open()) {
-        cout << "GUARDANDO ÁTOMOS..." << endl;
-
-        for(int i = 0; i < 1000; i++) {
-            // Verificar si llegamos al final de la colección
-            if (coleccion_atomos[i].simbolo == '\0') {
-                break;
-            }
-
-            // Guardar todos los campos separados por ;
-            archivo << coleccion_atomos[i].id << ";"
-                    << coleccion_atomos[i].simbolo << ";"
-                    << coleccion_atomos[i].x << ";"
-                    << coleccion_atomos[i].y << ";"
-                    << coleccion_atomos[i].z << ";"
-                    << coleccion_atomos[i].carga << endl;
-
-            // Mostrar en terminal lo que se está guardando
-            cout << "Guardado: " << coleccion_atomos[i].id << ";"
-                 << coleccion_atomos[i].simbolo << ";"
-                 << coleccion_atomos[i].x << ";"
-                 << coleccion_atomos[i].y << ";"
-                 << coleccion_atomos[i].z << ";"
-                 << coleccion_atomos[i].carga << endl;
+int buscar_proteina_por_nombre(const Proteina p[], int n, const char nombre[]) {
+    for (int i = 0; i < n; i++) {
+        if (p[i].nombre[0] == '\0') {
+            break;
         }
+        if (strcmp(p[i].nombre, nombre) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
 
-        archivo.close();
-        cout << "Se han guardado con éxito los átomos en atomos.txt" << endl;
+bool hay_atomos_cargados(const Atomo a[], int n) {
+    for (int i = 0; i < n; i++) {
+        if (a[i].simbolo != '\0') {
+            return true;
+        }
+    }
+    return false;
+}
 
-    } else {
-        cout << "Error: No se pudo abrir el archivo para guardar" << endl;
+bool validar_nombre(const char nombre[]) {
+    int longitud = 0;
+    while (nombre[longitud] != '\0') {
+        if (nombre[longitud] == ';') {
+            return false;
+        }
+        longitud++;
+        if (longitud >= 30) {
+            return false;
+        }
+    }
+    return longitud > 0;
+}
+
+void copiar_atomos_proteina(Proteina &p, const Atomo atomos[], int n) {
+    for (int i = 0; i < p.num_atomos; i++) {
+        int indice = buscar_atomo_por_id(atomos, n, p.ref_ids[i]);
+        if (indice >= 0) {
+            p.atomos[i] = atomos[indice];
+        }
+    }
+    for (int i = p.num_atomos; i < MAX_ATOMOS; i++) {
+        p.atomos[i].simbolo = '\0';
+        p.atomos[i].id = -1;
+        p.atomos[i].x = 0.0;
+        p.atomos[i].y = 0.0;
+        p.atomos[i].z = 0.0;
+        p.atomos[i].carga = 0.0;
     }
 }
 
+bool simbolo_valido(const char simbolo[]) {
+    if (simbolo[0] == '\0' || simbolo[1] != '\0') {
+        return false;
+    }
+    if (simbolo[0] < 'A' || simbolo[0] > 'Z') {
+        return false;
+    }
+    return true;
+}
 
-void cargar_atomos(Atomo coleccion_atomos[1000]) {
-    ifstream archivo("atomos.txt");
-    cout << "Cargando datos..." << endl;
+bool carga_valida(double carga) {
+    return carga >= 0.0;
+}
 
-    if (archivo.is_open()) {
-        char linea[100];
-        int indice = 0;
+bool cargar_atomos(Atomo a[], int n, const char archivo[]) {
+    ifstream entrada(archivo);
+    if (!entrada.is_open()) {
+        cout << "No se pudo abrir " << archivo << endl;
+        return false;
+    }
 
-        while (archivo.getline(linea, 100)) {
-            char campos[6][100]; // Para almacenar cada campo
-            int campo_actual = 0;
-            int indice_campo = 0;
+    inicializar_atomos(a, n);
 
-            // Separar por ;
-            for (int i = 0; linea[i] != '\0'; i++) {
-                if (linea[i] == ';') {
+    char linea[256];
+    int posicion = 0;
+
+    while (entrada.getline(linea, 256)) {
+        if (linea[0] == '\0') {
+            continue;
+        }
+
+        char campos[6][64];
+        int campo_actual = 0;
+        int indice_campo = 0;
+
+        for (int i = 0; linea[i] != '\0'; i++) {
+            if (linea[i] == ';') {
+                if (campo_actual < 6) {
                     campos[campo_actual][indice_campo] = '\0';
-                    campo_actual++;
-                    indice_campo = 0;
-                } else {
+                }
+                campo_actual++;
+                indice_campo = 0;
+            } else {
+                if (campo_actual < 6 && indice_campo < 63) {
                     campos[campo_actual][indice_campo++] = linea[i];
                 }
             }
-            campos[campo_actual][indice_campo] = '\0'; // Último campo
-
-            // CAST a tipo de dato del registro
-            Atomo a{
-                atoi(campos[0]),    // id
-                campos[1][0],       // simbolo (primer carácter)
-                atof(campos[2]),    // x
-                atof(campos[3]),    // y
-                atof(campos[4]),    // z
-                atof(campos[5])     // carga
-            };
-
-            coleccion_atomos[indice++] = a;
+        }
+        if (campo_actual < 6) {
+            campos[campo_actual][indice_campo] = '\0';
         }
 
-        archivo.close();
-
-        // Mostrar resultados
-        cout << "Atomos cargados: " << indice << endl;
-        for(int i = 0; i < indice && i < 5; i++) {
-            cout << "ID: " << coleccion_atomos[i].id
-                 << ", Sim: " << coleccion_atomos[i].simbolo
-                 << ", Pos: (" << coleccion_atomos[i].x << ","
-                 << coleccion_atomos[i].y << "," << coleccion_atomos[i].z
-                 << "), Carga: " << coleccion_atomos[i].carga << endl;
+        if (campo_actual + 1 != 6) {
+            cout << "Linea de atomos invalida: " << linea << endl;
+            continue;
         }
 
-    } else {
-        cout << "No se pudo abrir atomos.txt" << endl;
+        if (posicion >= n) {
+            cout << "Se alcanzo el limite de atomos" << endl;
+            break;
+        }
+
+        if (!simbolo_valido(campos[1])) {
+            cout << "Simbolo invalido. Tiene que ser una letra mayuscula, otra vez..." << endl;
+            continue;
+        }
+
+        Atomo nuevo;
+        nuevo.id = atoi(campos[0]);
+        nuevo.simbolo = campos[1][0];
+        nuevo.x = atof(campos[2]);
+        nuevo.y = atof(campos[3]);
+        nuevo.z = atof(campos[4]);
+        nuevo.carga = atof(campos[5]);
+
+        if (!carga_valida(nuevo.carga)) {
+            cout << "Carga invalida. Tiene que ser un numero no negativo, otra vez..." << endl;
+            continue;
+        }
+
+        a[posicion] = nuevo;
+        posicion++;
+    }
+
+    if (posicion < n) {
+        a[posicion].simbolo = '\0';
+    }
+
+    cout << "Se cargaron " << posicion << " atomos" << endl;
+    return posicion > 0;
+}
+
+bool cargar_proteinas(Proteina p[], int np, const char archivo[], const Atomo a[], int na) {
+    ifstream entrada(archivo);
+    if (!entrada.is_open()) {
+        cout << "No se pudo abrir " << archivo << endl;
+        return false;
+    }
+
+    inicializar_proteinas(p, np);
+
+    char linea[512];
+    int posicion = 0;
+
+    while (entrada.getline(linea, 512)) {
+        if (linea[0] == '\0') {
+            continue;
+        }
+
+        char campos[MAX_ATOMOS_PROT + 2][64];
+        int campo_actual = 0;
+        int indice_campo = 0;
+
+        for (int i = 0; linea[i] != '\0'; i++) {
+            if (linea[i] == ';') {
+                if (campo_actual < MAX_ATOMOS_PROT + 2) {
+                    campos[campo_actual][indice_campo] = '\0';
+                }
+                campo_actual++;
+                indice_campo = 0;
+            } else {
+                if (campo_actual < MAX_ATOMOS_PROT + 2 && indice_campo < 63) {
+                    campos[campo_actual][indice_campo++] = linea[i];
+                }
+            }
+        }
+        if (campo_actual < MAX_ATOMOS_PROT + 2) {
+            campos[campo_actual][indice_campo] = '\0';
+        }
+
+        int total_campos = campo_actual + 1;
+        if (total_campos < 2) {
+            cout << "Linea de proteinas invalida: " << linea << endl;
+            continue;
+        }
+
+        int cantidad = atoi(campos[1]);
+        if (cantidad < 1 || cantidad > MAX_ATOMOS_PROT) {
+            cout << "Cantidad de atomos invalida en linea: " << linea << endl;
+            continue;
+        }
+
+        if (total_campos != cantidad + 2) {
+            cout << "Cantidad de campos inconsistente en linea: " << linea << endl;
+            continue;
+        }
+
+        if (!validar_nombre(campos[0])) {
+            cout << "Nombre invalido en linea: " << linea << endl;
+            continue;
+        }
+
+        if (posicion >= np) {
+            cout << "Se alcanzo el limite de proteinas" << endl;
+            break;
+        }
+
+        bool ids_validos = true;
+        for (int i = 0; i < cantidad; i++) {
+            int id = atoi(campos[i + 2]);
+            if (buscar_atomo_por_id(a, na, id) == -1) {
+                ids_validos = false;
+                break;
+            }
+            for (int j = 0; j < i; j++) {
+                if (atoi(campos[j + 2]) == id) {
+                    ids_validos = false;
+                }
+            }
+        }
+
+        if (!ids_validos) {
+            cout << "IDs invalidos en linea: " << linea << endl;
+            continue;
+        }
+
+        Proteina nueva;
+        strcpy(nueva.nombre, campos[0]);
+        nueva.num_atomos = cantidad;
+        for (int i = 0; i < MAX_ATOMOS; i++) {
+            nueva.atomos[i].simbolo = '\0';
+            nueva.atomos[i].id = -1;
+            nueva.atomos[i].x = 0.0;
+            nueva.atomos[i].y = 0.0;
+            nueva.atomos[i].z = 0.0;
+            nueva.atomos[i].carga = 0.0;
+        }
+        for (int i = 0; i < MAX_ATOMOS_PROT; i++) {
+            nueva.ref_ids[i] = -1;
+        }
+
+        for (int i = 0; i < cantidad; i++) {
+            int id = atoi(campos[i + 2]);
+            nueva.ref_ids[i] = id;
+        }
+
+        copiar_atomos_proteina(nueva, a, na);
+
+        p[posicion] = nueva;
+        posicion++;
+    }
+
+    if (posicion < np) {
+        p[posicion].nombre[0] = '\0';
+    }
+
+    cout << "Se cargaron " << posicion << " proteinas" << endl;
+    return posicion > 0;
+}
+
+bool guardar_proteinas(const Proteina p[], int n, const char archivo[]) {
+    ofstream salida(archivo);
+    if (!salida.is_open()) {
+        cout << "No se pudo abrir " << archivo << " para escritura" << endl;
+        return false;
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (p[i].nombre[0] == '\0') {
+            break;
+        }
+        salida << p[i].nombre << ';' << p[i].num_atomos;
+        for (int j = 0; j < p[i].num_atomos; j++) {
+            salida << ';' << p[i].ref_ids[j];
+        }
+        salida << '\n';
+    }
+
+    cout << "Se guardaron las proteinas en " << archivo << endl;
+    return true;
+}
+
+bool leer_nombre(char nombre[], int tam) {
+    cin.getline(nombre, tam);
+    if (!cin) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        return false;
+    }
+    return true;
+}
+
+bool crear_proteina(Proteina p[], int np, const Atomo a[], int na) {
+    if (!hay_atomos_cargados(a, na)) {
+        cout << "No hay atomos cargados" << endl;
+        return false;
+    }
+
+    int posicion = posicion_vacia_proteinas(p, np);
+    if (posicion == -1) {
+        cout << "No hay espacio para mas proteinas" << endl;
+        return false;
+    }
+
+    char nombre[30];
+    bool nombre_valido = false;
+    while (!nombre_valido) {
+        cout << "Nombre de la proteina: ";
+        if (!leer_nombre(nombre, 30)) {
+            cout << "Error al leer el nombre" << endl;
+            return false;
+        }
+        if (!validar_nombre(nombre)) {
+            cout << "Nombre invalido. Debe tener hasta 29 caracteres y sin ';'" << endl;
+            continue;
+        }
+        if (buscar_proteina_por_nombre(p, np, nombre) != -1) {
+            cout << "Ya existe una proteina con ese nombre" << endl;
+            continue;
+        }
+        nombre_valido = true;
+    }
+
+    int cantidad = 0;
+    while (true) {
+        cout << "Cantidad de atomos (1-" << MAX_ATOMOS_PROT << "): ";
+        if (!(cin >> cantidad)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Entrada invalida" << endl;
+            continue;
+        }
+        cin.ignore(10000, '\n');
+        if (cantidad < 1 || cantidad > MAX_ATOMOS_PROT) {
+            cout << "Cantidad fuera de rango" << endl;
+            continue;
+        }
+        break;
+    }
+
+    int ids[MAX_ATOMOS_PROT];
+    for (int i = 0; i < MAX_ATOMOS_PROT; i++) {
+        ids[i] = -1;
+    }
+
+    for (int i = 0; i < cantidad; i++) {
+        bool valido = false;
+        while (!valido) {
+            int id;
+            cout << "ID del atomo " << (i + 1) << ": ";
+            if (!(cin >> id)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "Entrada invalida" << endl;
+                continue;
+            }
+            cin.ignore(10000, '\n');
+            if (buscar_atomo_por_id(a, na, id) == -1) {
+                cout << "No existe un atomo con ese ID" << endl;
+                continue;
+            }
+            bool duplicado = false;
+            for (int j = 0; j < i; j++) {
+                if (ids[j] == id) {
+                    duplicado = true;
+                    break;
+                }
+            }
+            if (duplicado) {
+                cout << "El ID ya fue utilizado" << endl;
+                continue;
+            }
+            ids[i] = id;
+            valido = true;
+        }
+    }
+
+    Proteina nueva;
+    strcpy(nueva.nombre, nombre);
+    nueva.num_atomos = cantidad;
+    for (int i = 0; i < MAX_ATOMOS; i++) {
+        nueva.atomos[i].simbolo = '\0';
+        nueva.atomos[i].id = -1;
+        nueva.atomos[i].x = 0.0;
+        nueva.atomos[i].y = 0.0;
+        nueva.atomos[i].z = 0.0;
+        nueva.atomos[i].carga = 0.0;
+    }
+    for (int i = 0; i < MAX_ATOMOS_PROT; i++) {
+        nueva.ref_ids[i] = -1;
+    }
+
+    for (int i = 0; i < cantidad; i++) {
+        nueva.ref_ids[i] = ids[i];
+    }
+
+    copiar_atomos_proteina(nueva, a, na);
+
+    p[posicion] = nueva;
+    cout << "Proteina creada" << endl;
+    return true;
+}
+
+bool editar_proteina(Proteina p[], int np, const Atomo a[], int na) {
+    if (!hay_atomos_cargados(a, na)) {
+        cout << "No hay atomos cargados" << endl;
+        return false;
+    }
+
+    cout << "Nombre de la proteina a editar: ";
+    char nombre[30];
+    if (!leer_nombre(nombre, 30)) {
+        cout << "Error al leer el nombre" << endl;
+        return false;
+    }
+
+    int indice = buscar_proteina_por_nombre(p, np, nombre);
+    if (indice == -1) {
+        cout << "Proteina no encontrada" << endl;
+        return false;
+    }
+
+    bool continuar = true;
+    while (continuar) {
+        cout << "1) Renombrar\n";
+        cout << "2) Cambiar ID\n";
+        cout << "3) Agregar ID\n";
+        cout << "4) Quitar ID\n";
+        cout << "5) Salir\n";
+        cout << "Opcion: ";
+        int opcion;
+        if (!(cin >> opcion)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Entrada invalida" << endl;
+            continue;
+        }
+        cin.ignore(10000, '\n');
+
+        if (opcion == 1) {
+            char nuevo_nombre[30];
+            bool valido = false;
+            while (!valido) {
+                cout << "Nuevo nombre: ";
+                if (!leer_nombre(nuevo_nombre, 30)) {
+                    cout << "Error al leer" << endl;
+                    break;
+                }
+                if (!validar_nombre(nuevo_nombre)) {
+                    cout << "Nombre invalido" << endl;
+                    continue;
+                }
+                int existente = buscar_proteina_por_nombre(p, np, nuevo_nombre);
+                if (existente != -1 && existente != indice) {
+                    cout << "Ya existe una proteina con ese nombre" << endl;
+                    continue;
+                }
+                valido = true;
+            }
+            if (valido) {
+                strcpy(p[indice].nombre, nuevo_nombre);
+                cout << "Nombre actualizado" << endl;
+            }
+        } else if (opcion == 2) {
+            if (p[indice].num_atomos == 0) {
+                cout << "La proteina no tiene atomos" << endl;
+                continue;
+            }
+            int posicion_id;
+            cout << "Posicion del ID a cambiar (1-" << p[indice].num_atomos << "): ";
+            if (!(cin >> posicion_id)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "Entrada invalida" << endl;
+                continue;
+            }
+            cin.ignore(10000, '\n');
+            if (posicion_id < 1 || posicion_id > p[indice].num_atomos) {
+                cout << "Posicion invalida" << endl;
+                continue;
+            }
+            int nuevo_id;
+            cout << "Nuevo ID: ";
+            if (!(cin >> nuevo_id)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "Entrada invalida" << endl;
+                continue;
+            }
+            cin.ignore(10000, '\n');
+            if (buscar_atomo_por_id(a, na, nuevo_id) == -1) {
+                cout << "No existe un atomo con ese ID" << endl;
+                continue;
+            }
+            bool duplicado = false;
+            for (int i = 0; i < p[indice].num_atomos; i++) {
+                if (i == posicion_id - 1) {
+                    continue;
+                }
+                if (p[indice].ref_ids[i] == nuevo_id) {
+                    duplicado = true;
+                    break;
+                }
+            }
+            if (duplicado) {
+                cout << "El ID ya esta en la proteina" << endl;
+                continue;
+            }
+            p[indice].ref_ids[posicion_id - 1] = nuevo_id;
+            copiar_atomos_proteina(p[indice], a, na);
+            cout << "ID actualizado" << endl;
+        } else if (opcion == 3) {
+            if (p[indice].num_atomos >= MAX_ATOMOS_PROT) {
+                cout << "No se pueden agregar mas IDs" << endl;
+                continue;
+            }
+            int nuevo_id;
+            cout << "ID a agregar: ";
+            if (!(cin >> nuevo_id)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "Entrada invalida" << endl;
+                continue;
+            }
+            cin.ignore(10000, '\n');
+            if (buscar_atomo_por_id(a, na, nuevo_id) == -1) {
+                cout << "No existe un atomo con ese ID" << endl;
+                continue;
+            }
+            bool duplicado = false;
+            for (int i = 0; i < p[indice].num_atomos; i++) {
+                if (p[indice].ref_ids[i] == nuevo_id) {
+                    duplicado = true;
+                    break;
+                }
+            }
+            if (duplicado) {
+                cout << "El ID ya esta en la proteina" << endl;
+                continue;
+            }
+            p[indice].ref_ids[p[indice].num_atomos] = nuevo_id;
+            p[indice].num_atomos++;
+            copiar_atomos_proteina(p[indice], a, na);
+            cout << "ID agregado" << endl;
+        } else if (opcion == 4) {
+            if (p[indice].num_atomos <= 1) {
+                cout << "La proteina debe conservar al menos un ID" << endl;
+                continue;
+            }
+            int posicion_id;
+            cout << "Posicion del ID a quitar (1-" << p[indice].num_atomos << "): ";
+            if (!(cin >> posicion_id)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "Entrada invalida" << endl;
+                continue;
+            }
+            cin.ignore(10000, '\n');
+            if (posicion_id < 1 || posicion_id > p[indice].num_atomos) {
+                cout << "Posicion invalida" << endl;
+                continue;
+            }
+            for (int i = posicion_id - 1; i < p[indice].num_atomos - 1; i++) {
+                p[indice].ref_ids[i] = p[indice].ref_ids[i + 1];
+            }
+            p[indice].ref_ids[p[indice].num_atomos - 1] = -1;
+            p[indice].num_atomos--;
+            copiar_atomos_proteina(p[indice], a, na);
+            cout << "ID eliminado" << endl;
+        } else if (opcion == 5) {
+            continuar = false;
+        } else {
+            cout << "Opcion invalida" << endl;
+        }
+    }
+
+    return true;
+}
+
+bool eliminar_proteina(Proteina p[], int np) {
+    cout << "Nombre de la proteina a eliminar: ";
+    char nombre[30];
+    if (!leer_nombre(nombre, 30)) {
+        cout << "Error al leer el nombre" << endl;
+        return false;
+    }
+
+    int indice = buscar_proteina_por_nombre(p, np, nombre);
+    if (indice == -1) {
+        cout << "Proteina no encontrada" << endl;
+        return false;
+    }
+
+    int siguiente = indice + 1;
+    while (siguiente < np && p[siguiente].nombre[0] != '\0') {
+        p[siguiente - 1] = p[siguiente];
+        siguiente++;
+    }
+    if (siguiente - 1 < np) {
+        p[siguiente - 1].nombre[0] = '\0';
+        p[siguiente - 1].num_atomos = 0;
+        for (int j = 0; j < MAX_ATOMOS; j++) {
+            p[siguiente - 1].atomos[j].simbolo = '\0';
+            p[siguiente - 1].atomos[j].id = -1;
+            p[siguiente - 1].atomos[j].x = 0.0;
+            p[siguiente - 1].atomos[j].y = 0.0;
+            p[siguiente - 1].atomos[j].z = 0.0;
+            p[siguiente - 1].atomos[j].carga = 0.0;
+        }
+        for (int j = 0; j < MAX_ATOMOS_PROT; j++) {
+            p[siguiente - 1].ref_ids[j] = -1;
+        }
+    }
+
+    cout << "Proteina eliminada" << endl;
+    return true;
+}
+
+void listar_proteinas(const Proteina p[], int np) {
+    for (int i = 0; i < np; i++) {
+        if (p[i].nombre[0] == '\0') {
+            break;
+        }
+        cout << p[i].nombre << ';' << p[i].num_atomos;
+        for (int j = 0; j < p[i].num_atomos; j++) {
+            cout << ';' << p[i].ref_ids[j];
+        }
+        cout << '\n';
+        for (int j = 0; j < p[i].num_atomos; j++) {
+            cout << "(" << p[i].ref_ids[j] << ':' << p[i].atomos[j].simbolo << ") ";
+        }
+        cout << '\n';
     }
 }
 
-void listar_atomos(Atomo coleccion_atomos[1000]) {
-	cout << "Se listaran los atomos" << endl;
-	for(int i = 0; i < 1000; i++) {
-		if(coleccion_atomos [i].simbolo == '\0') {
-			break;
-	}
+int main() {
+    Atomo atomos[MAX_ATOMOS];
+    Proteina proteinas[MAX_PROTEINAS];
 
-	cout << "ID: " << coleccion_atomos [i].id
-		<< ", Simbolo: " << coleccion_atomos[i].simbolo
-		<< ", X: " << coleccion_atomos[i].x
-		<< ", Y: " << coleccion_atomos[i].y
-		<< ", Z: " << coleccion_atomos[i].z
-		<< ", Carga: " << coleccion_atomos[i].carga
-		<< endl;
-}
+    inicializar_atomos(atomos, MAX_ATOMOS);
+    inicializar_proteinas(proteinas, MAX_PROTEINAS);
 
-	cout << "Ya se listaron" << endl;
-}
+    bool salir = false;
+    while (!salir) {
+        cout << "------" << endl;
+        cout << "1) Cargar atomos.txt\n";
+        cout << "2) Cargar protein.txt\n";
+        cout << "3) Crear proteina\n";
+        cout << "4) Editar proteina\n";
+        cout << "5) Eliminar proteina\n";
+        cout << "6) Listar proteinas\n";
+        cout << "7) Guardar protein.txt\n";
+        cout << "8) Salir\n";
+        cout << "Opcion: ";
 
+        int opcion;
+        if (!(cin >> opcion)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Opcion invalida" << endl;
+            continue;
+        }
+        cin.ignore(10000, '\n');
 
-
-int main(){
-
-  Atomo coleccion_atomos[1000];
-  //Atomo nuevo_atomo;
-
-  /*
-  crear_atomos(coleccion_atomos);
-  crear_atomos(coleccion_atomos);
-  crear_atomos(coleccion_atomos);
-  crear_atomos(coleccion_atomos);
-  crear_atomos(coleccion_atomos);
-
-  cout << "En la colección existen: " << endl;
-  for (int i=0; i < MAX_ATOMOS; i++){
-    if (coleccion_atomos[i].simbolo == '\0') {
-      break;
+        if (opcion == 1) {
+            cargar_atomos(atomos, MAX_ATOMOS, "atomos.txt");
+        } else if (opcion == 2) {
+            if (!hay_atomos_cargados(atomos, MAX_ATOMOS)) {
+                cout << "Cargue atomos antes de cargar proteinas" << endl;
+            } else {
+                cargar_proteinas(proteinas, MAX_PROTEINAS, "protein.txt", atomos, MAX_ATOMOS);
+            }
+        } else if (opcion == 3) {
+            crear_proteina(proteinas, MAX_PROTEINAS, atomos, MAX_ATOMOS);
+        } else if (opcion == 4) {
+            editar_proteina(proteinas, MAX_PROTEINAS, atomos, MAX_ATOMOS);
+        } else if (opcion == 5) {
+            eliminar_proteina(proteinas, MAX_PROTEINAS);
+        } else if (opcion == 6) {
+            listar_proteinas(proteinas, MAX_PROTEINAS);
+        } else if (opcion == 7) {
+            guardar_proteinas(proteinas, MAX_PROTEINAS, "protein.txt");
+        } else if (opcion == 8) {
+            salir = true;
+        } else {
+            cout << "Opcion invalida" << endl;
+        }
     }
-    cout << "El conjunto tiene " << i+1<< " atomos" << endl;
-    cout << coleccion_atomos[i].simbolo << endl;
-  }
-  */  //guardar_atomos(coleccion_atomos);
-  cargar_atomos(coleccion_atomos);
-  crear_atomos(coleccion_atomos);
-  guardar_atomos(coleccion_atomos);
-int opcion = 0;
 
-  while(opcion != 6) {
-	cout << "1. Cargar" << endl;
-	cout << "2. Crear" << endl;
-	cout << "3. Listar" << endl;
-	cout << "4. Guardar" << endl;
-	cout << "Para salir presione 5" << endl;
-	cout << "Opcion: ";
-	cin >> opcion;
-
-	if (opcion == 1) {
-		cargar_atomos(coleccion_atomos);
-    	} else if (opcion == 2) {
-      		crear_atomos(coleccion_atomos);
-    	} else if (opcion == 3) {
-	listar_atomos(coleccion_atomos);
-   	} else if (opcion == 4) {
-	guardar_atomos(coleccion_atomos);
-    	} else if (opcion == 5) {
-      		cout << "Saliendo del programa..." << endl;
-    	} else {
-      		cout << "no existe esa opcion" << endl;
-    	}
-  }
-
-  return 0;
+    return 0;
 }
