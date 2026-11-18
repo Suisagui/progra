@@ -4,7 +4,7 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 6 >>
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R] /Count 3 >>
 endobj
 3 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
@@ -16,243 +16,185 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Courier >>
 endobj
 6 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 7 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /FR 3 0 R /FB 4 0 R /FC 5 0 R >> >> /Contents 7 0 R >>
 endobj
 7 0 obj
-<< /Length 2299 >>
+<< /Length 4537 >>
 stream
-0.3 w 45 795 m 550 795 l S
-BT /F1 8 Tf 1 0 0 1 45 807 Tm (UNIVERSIDAD DE TALCA  |  INGENIERIA CIVIL EN BIOINFORMATICA  |  BASES DE DATOS) Tj ET
-BT /F2 14 Tf 1 0 0 1 45 762 Tm (Trabajo extraordinario - Unidad 1) Tj ET
-BT /F1 12 Tf 1 0 0 1 45 737 Tm (Bases de datos relacionales) Tj ET
-BT /F1 10.5 Tf 1 0 0 1 45 705 Tm (Estudiante: Vicente Aguilera) Tj ET
-BT /F1 10 Tf 1 0 0 1 45 685 Tm (Fecha del enunciado: 17 de noviembre de 2026) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 45 651 Tm (1. Identificacion de sensores con comportamiento superior al promedio) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 614 Tm (SELECT s.id_sensor,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 599.2 Tm (       e.nombre AS estacion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 584.4000000000001 Tm (       t.nombre AS tipo_medicion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 569.6000000000001 Tm (       COUNT\(m.id_medicion\) AS cantidad_mediciones,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 554.8000000000002 Tm (       AVG\(m.valor\) AS promedio_individual) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 540.0000000000002 Tm (FROM sensores s) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 525.2000000000003 Tm (INNER JOIN estaciones e ON e.id_estacion = s.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 510.40000000000026 Tm (INNER JOIN tipos_medicion t ON t.id_tipo = s.id_tipo) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 495.60000000000025 Tm (INNER JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 480.80000000000024 Tm (WHERE s.estado = 'Operativo') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 466.0000000000002 Tm (  AND e.estado = 'Activa') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 451.2000000000002 Tm (GROUP BY s.id_sensor, e.nombre, t.nombre, s.id_tipo) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 436.4000000000002 Tm (HAVING AVG\(m.valor\) > \() Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 421.6000000000002 Tm (    SELECT AVG\(m2.valor\)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 406.8000000000002 Tm (    FROM mediciones m2) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 392.00000000000017 Tm (    INNER JOIN sensores s2 ON s2.id_sensor = m2.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 377.20000000000016 Tm (    WHERE s2.id_tipo = s.id_tipo) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 362.40000000000015 Tm (\)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 347.60000000000014 Tm (ORDER BY promedio_individual DESC;) Tj ET
-0.3 w 45 43 m 550 43 l S
-BT /F1 8 Tf 1 0 0 1 525 29 Tm (1 / 6) Tj ET
+BT /FB 15 Tf 1 0 0 1 47 783 Tm (Trabajo extraordinario - Bases de Datos) Tj ET
+BT /FR 11 Tf 1 0 0 1 47 756 Tm (Vicente Aguilera) Tj ET
+BT /FB 11 Tf 1 0 0 1 47 719 Tm (Ejercicio 1) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 697 Tm (SELECT s.id_sensor,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 685.45 Tm (       e.nombre AS estacion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 673.9000000000001 Tm (       t.nombre AS tipo_medicion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 662.3500000000001 Tm (       COUNT\(m.id_medicion\) AS cantidad_mediciones,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 650.8000000000002 Tm (       AVG\(m.valor\) AS promedio_individual) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 639.2500000000002 Tm (FROM sensores s) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 627.7000000000003 Tm (INNER JOIN estaciones e ON e.id_estacion = s.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 616.1500000000003 Tm (INNER JOIN tipos_medicion t ON t.id_tipo = s.id_tipo) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 604.6000000000004 Tm (INNER JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 593.0500000000004 Tm (WHERE s.estado = 'Operativo') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 581.5000000000005 Tm (  AND e.estado = 'Activa') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 569.9500000000005 Tm (GROUP BY s.id_sensor, e.nombre, t.nombre, s.id_tipo) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 558.4000000000005 Tm (HAVING AVG\(m.valor\) > \() Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 546.8500000000006 Tm (    SELECT AVG\(m2.valor\)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 535.3000000000006 Tm (    FROM mediciones m2) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 523.7500000000007 Tm (    INNER JOIN sensores s2 ON s2.id_sensor = m2.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 512.2000000000007 Tm (    WHERE s2.id_tipo = s.id_tipo) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 500.6500000000007 Tm (\)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 489.1000000000007 Tm (ORDER BY promedio_individual DESC;) Tj ET
+BT /FB 11 Tf 1 0 0 1 47 460.5500000000007 Tm (Ejercicio 2) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 438.5500000000007 Tm (SELECT e.id_estacion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 427.0000000000007 Tm (       e.nombre AS estacion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 415.45000000000067 Tm (       r.nombre AS region,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 403.90000000000066 Tm (       \(SELECT COUNT\(*\)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 392.35000000000065 Tm (        FROM sensores s2) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 380.80000000000064 Tm (        WHERE s2.id_estacion = e.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 369.2500000000006 Tm (          AND s2.estado = 'Operativo'\) AS sensores_operativos,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 357.7000000000006 Tm (       COUNT\(m.id_medicion\) AS total_mediciones) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 346.1500000000006 Tm (FROM estaciones e) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 334.6000000000006 Tm (INNER JOIN regiones r ON r.id_region = e.id_region) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 323.0500000000006 Tm (LEFT JOIN sensores s ON s.id_estacion = e.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 311.50000000000057 Tm (LEFT JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 299.95000000000056 Tm (WHERE e.estado = 'Activa') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 288.40000000000055 Tm (GROUP BY e.id_estacion, e.nombre, r.nombre) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 276.85000000000053 Tm (HAVING \(SELECT COUNT\(*\)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 265.3000000000005 Tm (        FROM sensores s2) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 253.7500000000005 Tm (        WHERE s2.id_estacion = e.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 242.2000000000005 Tm (          AND s2.estado = 'Operativo'\) >= 2) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 230.6500000000005 Tm (   AND e.id_estacion NOT IN \() Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 219.10000000000048 Tm (       SELECT s3.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 207.55000000000047 Tm (       FROM sensores s3) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 196.00000000000045 Tm (       LEFT JOIN mediciones m3 ON m3.id_sensor = s3.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 184.45000000000044 Tm (       WHERE s3.estado = 'Operativo') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 172.90000000000043 Tm (       GROUP BY s3.id_estacion, s3.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 161.35000000000042 Tm (       HAVING COUNT\(m3.id_medicion\) < 5) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 149.8000000000004 Tm (   \)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 138.2500000000004 Tm (   AND COUNT\(m.id_medicion\) > 20) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 126.7000000000004 Tm (ORDER BY total_mediciones DESC;) Tj ET
+0.6 w 47 44 m 548 44 l S
+BT /FR 8 Tf 1 0 0 1 524 29 Tm (1/3) Tj ET
 endstream
 endobj
 8 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 9 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /FR 3 0 R /FB 4 0 R /FC 5 0 R >> >> /Contents 9 0 R >>
 endobj
 9 0 obj
-<< /Length 2889 >>
+<< /Length 3706 >>
 stream
-0.3 w 45 795 m 550 795 l S
-BT /F1 8 Tf 1 0 0 1 45 807 Tm (UNIVERSIDAD DE TALCA  |  INGENIERIA CIVIL EN BIOINFORMATICA  |  BASES DE DATOS) Tj ET
-BT /F2 14 Tf 1 0 0 1 45 762 Tm (Trabajo extraordinario - Unidad 1) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 45 710 Tm (2. Estaciones con actividad de monitoreo sostenida) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 673 Tm (SELECT e.id_estacion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 658.2 Tm (       e.nombre AS estacion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 643.4000000000001 Tm (       r.nombre AS region,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 628.6000000000001 Tm (       \(SELECT COUNT\(*\)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 613.8000000000002 Tm (        FROM sensores s2) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 599.0000000000002 Tm (        WHERE s2.id_estacion = e.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 584.2000000000003 Tm (          AND s2.estado = 'Operativo'\) AS sensores_operativos,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 569.4000000000003 Tm (       COUNT\(m.id_medicion\) AS total_mediciones) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 554.6000000000004 Tm (FROM estaciones e) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 539.8000000000004 Tm (INNER JOIN regiones r ON r.id_region = e.id_region) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 525.0000000000005 Tm (LEFT JOIN sensores s ON s.id_estacion = e.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 510.20000000000044 Tm (LEFT JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 495.40000000000043 Tm (WHERE e.estado = 'Activa') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 480.6000000000004 Tm (GROUP BY e.id_estacion, e.nombre, r.nombre) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 465.8000000000004 Tm (HAVING \(SELECT COUNT\(*\)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 451.0000000000004 Tm (        FROM sensores s2) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 436.2000000000004 Tm (        WHERE s2.id_estacion = e.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 421.4000000000004 Tm (          AND s2.estado = 'Operativo'\) >= 2) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 406.60000000000036 Tm (   AND e.id_estacion NOT IN \() Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 391.80000000000035 Tm (       SELECT s3.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 377.00000000000034 Tm (       FROM sensores s3) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 362.20000000000033 Tm (       LEFT JOIN mediciones m3 ON m3.id_sensor = s3.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 347.4000000000003 Tm (       WHERE s3.estado = 'Operativo') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 332.6000000000003 Tm (       GROUP BY s3.id_estacion, s3.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 317.8000000000003 Tm (       HAVING COUNT\(m3.id_medicion\) < 5) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 303.0000000000003 Tm (   \)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 288.2000000000003 Tm (   AND COUNT\(m.id_medicion\) > 20) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 273.40000000000026 Tm (ORDER BY total_mediciones DESC;) Tj ET
-0.3 w 45 43 m 550 43 l S
-BT /F1 8 Tf 1 0 0 1 525 29 Tm (2 / 6) Tj ET
+BT /FB 11 Tf 1 0 0 1 47 783 Tm (Ejercicio 3) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 761 Tm (SELECT s.id_sensor,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 749.45 Tm (       e.nombre AS estacion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 737.9000000000001 Tm (       r.nombre AS region,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 726.3500000000001 Tm (       t.nombre AS tipo_medicion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 714.8000000000002 Tm (       s.fecha_instalacion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 703.2500000000002 Tm (       s.estado AS estado_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 691.7000000000003 Tm (FROM sensores s) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 680.1500000000003 Tm (INNER JOIN estaciones e ON e.id_estacion = s.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 668.6000000000004 Tm (INNER JOIN regiones r ON r.id_region = e.id_region) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 657.0500000000004 Tm (INNER JOIN tipos_medicion t ON t.id_tipo = s.id_tipo) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 645.5000000000005 Tm (LEFT JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 633.9500000000005 Tm (WHERE s.fecha_instalacion <= CURRENT_DATE - INTERVAL '30 days') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 622.4000000000005 Tm (  AND m.id_medicion IS NULL) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 610.8500000000006 Tm (ORDER BY s.fecha_instalacion ASC;) Tj ET
+BT /FB 11 Tf 1 0 0 1 47 582.3000000000006 Tm (Ejercicio 4) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 560.3000000000006 Tm (SELECT e.id_estacion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 548.7500000000007 Tm (       e.nombre AS estacion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 537.2000000000007 Tm (       r.nombre AS region,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 525.6500000000008 Tm (       COUNT\(s.id_sensor\) AS sensores_operativos) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 514.1000000000008 Tm (FROM estaciones e) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 502.5500000000008 Tm (INNER JOIN regiones r ON r.id_region = e.id_region) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 491.0000000000008 Tm (LEFT JOIN sensores s ON s.id_estacion = e.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 479.4500000000008 Tm (                   AND s.estado = 'Operativo') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 467.9000000000008 Tm (WHERE e.estado = 'Activa') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 456.35000000000076 Tm (GROUP BY e.id_estacion, e.nombre, e.id_region, r.nombre) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 444.80000000000075 Tm (HAVING COUNT\(s.id_sensor\) > \() Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 433.25000000000074 Tm (    SELECT AVG\(resumen.cantidad\)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 421.7000000000007 Tm (    FROM \() Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 410.1500000000007 Tm (        SELECT e2.id_region,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 398.6000000000007 Tm (               e2.id_estacion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 387.0500000000007 Tm (               COUNT\(s2.id_sensor\) AS cantidad) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 375.5000000000007 Tm (        FROM estaciones e2) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 363.95000000000067 Tm (        LEFT JOIN sensores s2 ON s2.id_estacion = e2.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 352.40000000000066 Tm (                            AND s2.estado = 'Operativo') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 340.85000000000065 Tm (        WHERE e2.estado = 'Activa') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 329.30000000000064 Tm (        GROUP BY e2.id_region, e2.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 317.7500000000006 Tm (    \) AS resumen) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 306.2000000000006 Tm (    WHERE resumen.id_region = e.id_region) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 294.6500000000006 Tm (\)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 283.1000000000006 Tm (ORDER BY r.nombre ASC, sensores_operativos DESC;) Tj ET
+0.6 w 47 44 m 548 44 l S
+BT /FR 8 Tf 1 0 0 1 524 29 Tm (2/3) Tj ET
 endstream
 endobj
 10 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 11 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /FR 3 0 R /FB 4 0 R /FC 5 0 R >> >> /Contents 11 0 R >>
 endobj
 11 0 obj
-<< /Length 1978 >>
+<< /Length 3547 >>
 stream
-0.3 w 45 795 m 550 795 l S
-BT /F1 8 Tf 1 0 0 1 45 807 Tm (UNIVERSIDAD DE TALCA  |  INGENIERIA CIVIL EN BIOINFORMATICA  |  BASES DE DATOS) Tj ET
-BT /F2 14 Tf 1 0 0 1 45 762 Tm (Trabajo extraordinario - Unidad 1) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 45 710 Tm (3. Sensores sin actividad reciente) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 673 Tm (SELECT s.id_sensor,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 658.2 Tm (       e.nombre AS estacion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 643.4000000000001 Tm (       r.nombre AS region,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 628.6000000000001 Tm (       t.nombre AS tipo_medicion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 613.8000000000002 Tm (       s.fecha_instalacion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 599.0000000000002 Tm (       s.estado AS estado_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 584.2000000000003 Tm (FROM sensores s) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 569.4000000000003 Tm (INNER JOIN estaciones e ON e.id_estacion = s.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 554.6000000000004 Tm (INNER JOIN regiones r ON r.id_region = e.id_region) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 539.8000000000004 Tm (INNER JOIN tipos_medicion t ON t.id_tipo = s.id_tipo) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 525.0000000000005 Tm (LEFT JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 510.20000000000044 Tm (WHERE s.fecha_instalacion <= CURRENT_DATE - INTERVAL '30 days') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 495.40000000000043 Tm (  AND m.id_medicion IS NULL) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 480.6000000000004 Tm (ORDER BY s.fecha_instalacion ASC;) Tj ET
-BT /F1 8.7 Tf 1 0 0 1 45 448.8000000000004 Tm (CURRENT_DATE - INTERVAL '30 days' calcula la fecha limite de instalacion.) Tj ET
-BT /F1 8.7 Tf 1 0 0 1 45 433.8000000000004 Tm (Referencia: PostgreSQL, Date/Time Functions and Operators.) Tj ET
-BT /F1 8.4 Tf 1 0 0 1 45 418.8000000000004 Tm (https://www.postgresql.org/docs/current/functions-datetime.html) Tj ET
-0.3 w 45 43 m 550 43 l S
-BT /F1 8 Tf 1 0 0 1 525 29 Tm (3 / 6) Tj ET
+BT /FB 11 Tf 1 0 0 1 47 783 Tm (Ejercicio 5) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 761 Tm (SELECT r.id_region,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 749.45 Tm (       r.nombre AS region,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 737.9000000000001 Tm (       t.nombre AS tipo_medicion,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 726.3500000000001 Tm (       COUNT\(DISTINCT e.id_estacion\) AS estaciones_activas,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 714.8000000000002 Tm (       COUNT\(DISTINCT s.id_sensor\) AS sensores_operativos,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 703.2500000000002 Tm (       COUNT\(m.id_medicion\) AS total_mediciones,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 691.7000000000003 Tm (       AVG\(m.valor\) AS promedio_mediciones) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 680.1500000000003 Tm (FROM regiones r) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 668.6000000000004 Tm (INNER JOIN estaciones e ON e.id_region = r.id_region) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 657.0500000000004 Tm (INNER JOIN sensores s ON s.id_estacion = e.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 645.5000000000005 Tm (INNER JOIN tipos_medicion t ON t.id_tipo = s.id_tipo) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 633.9500000000005 Tm (LEFT JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 622.4000000000005 Tm (WHERE e.estado = 'Activa') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 610.8500000000006 Tm (  AND s.estado = 'Operativo') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 599.3000000000006 Tm (GROUP BY r.id_region, r.nombre, t.id_tipo, t.nombre) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 587.7500000000007 Tm (HAVING COUNT\(DISTINCT e.id_estacion\) >= 3) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 576.2000000000007 Tm (   AND AVG\(m.valor\) > \() Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 564.6500000000008 Tm (       SELECT AVG\(m2.valor\)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 553.1000000000008 Tm (       FROM mediciones m2) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 541.5500000000009 Tm (       INNER JOIN sensores s2 ON s2.id_sensor = m2.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 530.0000000000009 Tm (       WHERE s2.id_tipo = t.id_tipo) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 518.450000000001 Tm (   \)) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 506.90000000000094 Tm (ORDER BY r.nombre ASC, t.nombre ASC;) Tj ET
+BT /FB 11 Tf 1 0 0 1 47 478.35000000000093 Tm (Ejercicio 6) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 456.35000000000093 Tm (SELECT r.id_region,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 444.8000000000009 Tm (       r.nombre AS region,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 433.2500000000009 Tm (       COUNT\(DISTINCT e.id_estacion\) AS estaciones_activas,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 421.7000000000009 Tm (       COUNT\(DISTINCT s.id_sensor\) AS sensores_operativos,) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 410.1500000000009 Tm (       COUNT\(m.id_medicion\) AS mediciones) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 398.6000000000009 Tm (FROM regiones r) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 387.05000000000086 Tm (LEFT JOIN estaciones e ON e.id_region = r.id_region) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 375.50000000000085 Tm (                       AND e.estado = 'Activa') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 363.95000000000084 Tm (LEFT JOIN sensores s ON s.id_estacion = e.id_estacion) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 352.40000000000083 Tm (                    AND s.estado = 'Operativo') Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 340.8500000000008 Tm (LEFT JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 329.3000000000008 Tm (GROUP BY r.id_region, r.nombre) Tj ET
+BT /FC 8.7 Tf 1 0 0 1 52 317.7500000000008 Tm (ORDER BY r.nombre ASC;) Tj ET
+0.6 w 47 44 m 548 44 l S
+BT /FR 8 Tf 1 0 0 1 524 29 Tm (3/3) Tj ET
 endstream
 endobj
 12 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 13 0 R >>
-endobj
-13 0 obj
-<< /Length 2626 >>
-stream
-0.3 w 45 795 m 550 795 l S
-BT /F1 8 Tf 1 0 0 1 45 807 Tm (UNIVERSIDAD DE TALCA  |  INGENIERIA CIVIL EN BIOINFORMATICA  |  BASES DE DATOS) Tj ET
-BT /F2 14 Tf 1 0 0 1 45 762 Tm (Trabajo extraordinario - Unidad 1) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 45 710 Tm (4. Estaciones que superan el promedio regional de sensores) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 673 Tm (SELECT e.id_estacion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 658.2 Tm (       e.nombre AS estacion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 643.4000000000001 Tm (       r.nombre AS region,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 628.6000000000001 Tm (       COUNT\(s.id_sensor\) AS sensores_operativos) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 613.8000000000002 Tm (FROM estaciones e) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 599.0000000000002 Tm (INNER JOIN regiones r ON r.id_region = e.id_region) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 584.2000000000003 Tm (LEFT JOIN sensores s ON s.id_estacion = e.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 569.4000000000003 Tm (                   AND s.estado = 'Operativo') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 554.6000000000004 Tm (WHERE e.estado = 'Activa') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 539.8000000000004 Tm (GROUP BY e.id_estacion, e.nombre, e.id_region, r.nombre) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 525.0000000000005 Tm (HAVING COUNT\(s.id_sensor\) > \() Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 510.20000000000044 Tm (    SELECT AVG\(resumen.cantidad\)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 495.40000000000043 Tm (    FROM \() Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 480.6000000000004 Tm (        SELECT e2.id_region,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 465.8000000000004 Tm (               e2.id_estacion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 451.0000000000004 Tm (               COUNT\(s2.id_sensor\) AS cantidad) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 436.2000000000004 Tm (        FROM estaciones e2) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 421.4000000000004 Tm (        LEFT JOIN sensores s2 ON s2.id_estacion = e2.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 406.60000000000036 Tm (                            AND s2.estado = 'Operativo') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 391.80000000000035 Tm (        WHERE e2.estado = 'Activa') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 377.00000000000034 Tm (        GROUP BY e2.id_region, e2.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 362.20000000000033 Tm (    \) AS resumen) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 347.4000000000003 Tm (    WHERE resumen.id_region = e.id_region) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 332.6000000000003 Tm (\)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 317.8000000000003 Tm (ORDER BY r.nombre ASC, sensores_operativos DESC;) Tj ET
-0.3 w 45 43 m 550 43 l S
-BT /F1 8 Tf 1 0 0 1 525 29 Tm (4 / 6) Tj ET
-endstream
-endobj
-14 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 15 0 R >>
-endobj
-15 0 obj
-<< /Length 2520 >>
-stream
-0.3 w 45 795 m 550 795 l S
-BT /F1 8 Tf 1 0 0 1 45 807 Tm (UNIVERSIDAD DE TALCA  |  INGENIERIA CIVIL EN BIOINFORMATICA  |  BASES DE DATOS) Tj ET
-BT /F2 14 Tf 1 0 0 1 45 762 Tm (Trabajo extraordinario - Unidad 1) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 45 710 Tm (5. Analisis comparativo del monitoreo por region y tipo de medicion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 673 Tm (SELECT r.id_region,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 658.2 Tm (       r.nombre AS region,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 643.4000000000001 Tm (       t.nombre AS tipo_medicion,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 628.6000000000001 Tm (       COUNT\(DISTINCT e.id_estacion\) AS estaciones_activas,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 613.8000000000002 Tm (       COUNT\(DISTINCT s.id_sensor\) AS sensores_operativos,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 599.0000000000002 Tm (       COUNT\(m.id_medicion\) AS total_mediciones,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 584.2000000000003 Tm (       AVG\(m.valor\) AS promedio_mediciones) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 569.4000000000003 Tm (FROM regiones r) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 554.6000000000004 Tm (INNER JOIN estaciones e ON e.id_region = r.id_region) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 539.8000000000004 Tm (INNER JOIN sensores s ON s.id_estacion = e.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 525.0000000000005 Tm (INNER JOIN tipos_medicion t ON t.id_tipo = s.id_tipo) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 510.20000000000044 Tm (LEFT JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 495.40000000000043 Tm (WHERE e.estado = 'Activa') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 480.6000000000004 Tm (  AND s.estado = 'Operativo') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 465.8000000000004 Tm (GROUP BY r.id_region, r.nombre, t.id_tipo, t.nombre) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 451.0000000000004 Tm (HAVING COUNT\(DISTINCT e.id_estacion\) >= 3) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 436.2000000000004 Tm (   AND AVG\(m.valor\) > \() Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 421.4000000000004 Tm (       SELECT AVG\(m2.valor\)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 406.60000000000036 Tm (       FROM mediciones m2) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 391.80000000000035 Tm (       INNER JOIN sensores s2 ON s2.id_sensor = m2.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 377.00000000000034 Tm (       WHERE s2.id_tipo = t.id_tipo) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 362.20000000000033 Tm (   \)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 347.4000000000003 Tm (ORDER BY r.nombre ASC, t.nombre ASC;) Tj ET
-0.3 w 45 43 m 550 43 l S
-BT /F1 8 Tf 1 0 0 1 525 29 Tm (5 / 6) Tj ET
-endstream
-endobj
-16 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 17 0 R >>
-endobj
-17 0 obj
-<< /Length 1598 >>
-stream
-0.3 w 45 795 m 550 795 l S
-BT /F1 8 Tf 1 0 0 1 45 807 Tm (UNIVERSIDAD DE TALCA  |  INGENIERIA CIVIL EN BIOINFORMATICA  |  BASES DE DATOS) Tj ET
-BT /F2 14 Tf 1 0 0 1 45 762 Tm (Trabajo extraordinario - Unidad 1) Tj ET
-BT /F2 10.5 Tf 1 0 0 1 45 710 Tm (6. Reconstruccion de una consulta a partir de resultados) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 673 Tm (SELECT r.id_region,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 658.2 Tm (       r.nombre AS region,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 643.4000000000001 Tm (       COUNT\(DISTINCT e.id_estacion\) AS estaciones_activas,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 628.6000000000001 Tm (       COUNT\(DISTINCT s.id_sensor\) AS sensores_operativos,) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 613.8000000000002 Tm (       COUNT\(m.id_medicion\) AS mediciones) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 599.0000000000002 Tm (FROM regiones r) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 584.2000000000003 Tm (LEFT JOIN estaciones e ON e.id_region = r.id_region) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 569.4000000000003 Tm (                       AND e.estado = 'Activa') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 554.6000000000004 Tm (LEFT JOIN sensores s ON s.id_estacion = e.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 539.8000000000004 Tm (                    AND s.estado = 'Operativo') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 525.0000000000005 Tm (LEFT JOIN mediciones m ON m.id_sensor = s.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 510.20000000000044 Tm (GROUP BY r.id_region, r.nombre) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 495.40000000000043 Tm (ORDER BY r.nombre ASC;) Tj ET
-0.3 w 45 43 m 550 43 l S
-BT /F1 8 Tf 1 0 0 1 525 29 Tm (6 / 6) Tj ET
-endstream
-endobj
-18 0 obj
-<< /Title (Trabajo extraordinario - Unidad 1) /Author (Vicente Aguilera) >>
+<< /Title (Trabajo extraordinario - Bases de Datos) /Author (Vicente Aguilera) >>
 endobj
 xref
-0 19
+0 13
 0000000000 65535 f 
 0000000015 00000 n 
 0000000064 00000 n 
-0000000155 00000 n 
-0000000225 00000 n 
-0000000300 00000 n 
-0000000368 00000 n 
-0000000521 00000 n 
-0000002871 00000 n 
-0000003024 00000 n 
-0000005964 00000 n 
-0000006119 00000 n 
-0000008149 00000 n 
-0000008304 00000 n 
-0000010982 00000 n 
-0000011137 00000 n 
-0000013709 00000 n 
-0000013864 00000 n 
-0000015514 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000000279 00000 n 
+0000000347 00000 n 
+0000000500 00000 n 
+0000005088 00000 n 
+0000005241 00000 n 
+0000008998 00000 n 
+0000009153 00000 n 
+0000012752 00000 n 
 trailer
-<< /Size 19 /Root 1 0 R /Info 18 0 R >>
+<< /Size 13 /Root 1 0 R /Info 12 0 R >>
 startxref
-15606
+12850
 %%EOF
