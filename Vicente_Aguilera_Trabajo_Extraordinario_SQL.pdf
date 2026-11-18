@@ -19,7 +19,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 7 0 R >>
 endobj
 7 0 obj
-<< /Length 2590 >>
+<< /Length 2299 >>
 stream
 0.3 w 45 795 m 550 795 l S
 BT /F1 8 Tf 1 0 0 1 45 807 Tm (UNIVERSIDAD DE TALCA  |  INGENIERIA CIVIL EN BIOINFORMATICA  |  BASES DE DATOS) Tj ET
@@ -44,12 +44,9 @@ BT /F3 9.2 Tf 1 0 0 1 49 436.4000000000002 Tm (HAVING AVG\(m.valor\) > \() Tj ET
 BT /F3 9.2 Tf 1 0 0 1 49 421.6000000000002 Tm (    SELECT AVG\(m2.valor\)) Tj ET
 BT /F3 9.2 Tf 1 0 0 1 49 406.8000000000002 Tm (    FROM mediciones m2) Tj ET
 BT /F3 9.2 Tf 1 0 0 1 49 392.00000000000017 Tm (    INNER JOIN sensores s2 ON s2.id_sensor = m2.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 377.20000000000016 Tm (    INNER JOIN estaciones e2 ON e2.id_estacion = s2.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 362.40000000000015 Tm (    WHERE s2.id_tipo = s.id_tipo) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 347.60000000000014 Tm (      AND s2.estado = 'Operativo') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 332.8000000000001 Tm (      AND e2.estado = 'Activa') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 318.0000000000001 Tm (\)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 303.2000000000001 Tm (ORDER BY promedio_individual DESC;) Tj ET
+BT /F3 9.2 Tf 1 0 0 1 49 377.20000000000016 Tm (    WHERE s2.id_tipo = s.id_tipo) Tj ET
+BT /F3 9.2 Tf 1 0 0 1 49 362.40000000000015 Tm (\)) Tj ET
+BT /F3 9.2 Tf 1 0 0 1 49 347.60000000000014 Tm (ORDER BY promedio_individual DESC;) Tj ET
 0.3 w 45 43 m 550 43 l S
 BT /F1 8 Tf 1 0 0 1 525 29 Tm (1 / 6) Tj ET
 endstream
@@ -170,7 +167,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.276 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 15 0 R >>
 endobj
 15 0 obj
-<< /Length 2820 >>
+<< /Length 2520 >>
 stream
 0.3 w 45 795 m 550 795 l S
 BT /F1 8 Tf 1 0 0 1 45 807 Tm (UNIVERSIDAD DE TALCA  |  INGENIERIA CIVIL EN BIOINFORMATICA  |  BASES DE DATOS) Tj ET
@@ -196,12 +193,9 @@ BT /F3 9.2 Tf 1 0 0 1 49 436.2000000000004 Tm (   AND AVG\(m.valor\) > \() Tj ET
 BT /F3 9.2 Tf 1 0 0 1 49 421.4000000000004 Tm (       SELECT AVG\(m2.valor\)) Tj ET
 BT /F3 9.2 Tf 1 0 0 1 49 406.60000000000036 Tm (       FROM mediciones m2) Tj ET
 BT /F3 9.2 Tf 1 0 0 1 49 391.80000000000035 Tm (       INNER JOIN sensores s2 ON s2.id_sensor = m2.id_sensor) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 377.00000000000034 Tm (       INNER JOIN estaciones e2 ON e2.id_estacion = s2.id_estacion) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 362.20000000000033 Tm (       WHERE s2.id_tipo = t.id_tipo) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 347.4000000000003 Tm (         AND s2.estado = 'Operativo') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 332.6000000000003 Tm (         AND e2.estado = 'Activa') Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 317.8000000000003 Tm (   \)) Tj ET
-BT /F3 9.2 Tf 1 0 0 1 49 303.0000000000003 Tm (ORDER BY r.nombre ASC, t.nombre ASC;) Tj ET
+BT /F3 9.2 Tf 1 0 0 1 49 377.00000000000034 Tm (       WHERE s2.id_tipo = t.id_tipo) Tj ET
+BT /F3 9.2 Tf 1 0 0 1 49 362.20000000000033 Tm (   \)) Tj ET
+BT /F3 9.2 Tf 1 0 0 1 49 347.4000000000003 Tm (ORDER BY r.nombre ASC, t.nombre ASC;) Tj ET
 0.3 w 45 43 m 550 43 l S
 BT /F1 8 Tf 1 0 0 1 525 29 Tm (5 / 6) Tj ET
 endstream
@@ -246,19 +240,19 @@ xref
 0000000300 00000 n 
 0000000368 00000 n 
 0000000521 00000 n 
-0000003162 00000 n 
-0000003315 00000 n 
-0000006255 00000 n 
-0000006410 00000 n 
-0000008440 00000 n 
-0000008595 00000 n 
-0000011273 00000 n 
-0000011428 00000 n 
-0000014300 00000 n 
-0000014455 00000 n 
-0000016105 00000 n 
+0000002871 00000 n 
+0000003024 00000 n 
+0000005964 00000 n 
+0000006119 00000 n 
+0000008149 00000 n 
+0000008304 00000 n 
+0000010982 00000 n 
+0000011137 00000 n 
+0000013709 00000 n 
+0000013864 00000 n 
+0000015514 00000 n 
 trailer
 << /Size 19 /Root 1 0 R /Info 18 0 R >>
 startxref
-16197
+15606
 %%EOF
